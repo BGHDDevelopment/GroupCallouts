@@ -1,0 +1,9 @@
+C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\bin\Debug\TestFivePD_Project.dll
+C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\bin\Debug\TestFivePD_Project.pdb
+C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\bin\Debug\CalloutAPI.net.dll
+C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\bin\Debug\CitizenFX.Core.dll
+C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\obj\Debug\TestFivePD Project.csprojAssemblyReference.cache
+C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\obj\Debug\TestFivePD Project.csproj.CoreCompileInputs.cache
+C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\obj\Debug\TestFivePD Project.csproj.CopyComplete
+C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\obj\Debug\TestFivePD_Project.dll
+C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\obj\Debug\TestFivePD_Project.pdb

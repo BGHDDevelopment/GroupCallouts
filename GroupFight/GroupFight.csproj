@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <UserSecretsId>aspnet-GroupFight-0B4D75B3-A4A0-46AB-920F-D387FCB2C0F0</UserSecretsId>
+        <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
+    </PropertyGroup>
+
+    <ItemGroup>
+    </ItemGroup>
+
+</Project>
