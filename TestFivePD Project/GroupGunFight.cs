@@ -7,7 +7,7 @@ using CitizenFX.Core.NaturalMotion;
 namespace GroupGunFight
 {
     
-    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0", Probability.Low)]
+    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.2", Probability.Low)]
     public class GroupGunFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4;
