@@ -6,7 +6,7 @@ using CalloutAPI;
 namespace GroupFight
 {
     
-    [CalloutProperties("Group Fight", "BGHDDevelopment", "1.0", Probability.Low)]
+    [CalloutProperties("Group Fight", "BGHDDevelopment", "1.0", Probability.Medium)]
     public class GroupFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4, suspect5, suspect6, suspect7, suspect8, suspect9, suspect10;
