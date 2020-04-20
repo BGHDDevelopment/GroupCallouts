@@ -23,7 +23,7 @@ namespace GroupGunFight
             ShortName = "Group Gun Fight";
             CalloutDescription = "4 armed suspects are fighting!";
             ResponseCode = 3;
-            StartDistance = 20f;
+            StartDistance = 30f;
         }
 
         public async override Task Init()
