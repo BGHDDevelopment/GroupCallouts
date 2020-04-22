@@ -29,16 +29,16 @@ namespace GroupFight
         {
             OnAccept();
 
-            suspect = await SpawnPed(GetRandomPed(), Location);
-            suspect2 = await SpawnPed(GetRandomPed(), Location);
-            suspect3 = await SpawnPed(GetRandomPed(), Location);
-            suspect4 = await SpawnPed(GetRandomPed(), Location);
-            suspect5 = await SpawnPed(GetRandomPed(), Location);
-            suspect6 = await SpawnPed(GetRandomPed(), Location);
-            suspect7 = await SpawnPed(GetRandomPed(), Location);
-            suspect8 = await SpawnPed(GetRandomPed(), Location);
-            suspect9 = await SpawnPed(GetRandomPed(), Location);
-            suspect10 = await SpawnPed(GetRandomPed(), Location);
+            suspect = await SpawnPed(GetRandomPed(), Location + 1);
+            suspect2 = await SpawnPed(GetRandomPed(), Location - 1);
+            suspect3 = await SpawnPed(GetRandomPed(), Location + 2);
+            suspect4 = await SpawnPed(GetRandomPed(), Location - 2);
+            suspect5 = await SpawnPed(GetRandomPed(), Location + 1);
+            suspect6 = await SpawnPed(GetRandomPed(), Location - 1);
+            suspect7 = await SpawnPed(GetRandomPed(), Location + 3);
+            suspect8 = await SpawnPed(GetRandomPed(), Location - 3);
+            suspect9 = await SpawnPed(GetRandomPed(), Location + 1);
+            suspect10 = await SpawnPed(GetRandomPed(), Location - 1);
 
             suspect.AlwaysKeepTask = true;
             suspect.BlockPermanentEvents = true;
