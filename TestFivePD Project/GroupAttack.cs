@@ -7,7 +7,7 @@ using CalloutAPI;
 namespace GroupAttack
 {
 
-    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.0.2", Probability.High)]
+    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.0.3", Probability.High)]
     public class GroupAttack : Callout
     {
         Ped suspect, suspect2, suspect3, victim;
