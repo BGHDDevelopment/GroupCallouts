@@ -1,17 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 using CitizenFX.Core;
 using CalloutAPI;
+using CitizenFX.Core.Native;
 using CitizenFX.Core.NaturalMotion;
 
 namespace GroupGunFight
 {
     
-    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.3", Probability.Low)]
+    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.4", Probability.Low)]
     public class GroupGunFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4;
-        
+        List<object> items = new List<object>();
+        List<object> items2 = new List<object>();
+        List<object> items3 = new List<object>();
+        List<object> items4 = new List<object>();
         public GroupGunFight()
         {
             Random rnd = new Random();
@@ -29,12 +35,67 @@ namespace GroupGunFight
         public async override Task Init()
         {
             OnAccept();
-
+            dynamic playerData = GetPlayerData();
+            string displayName = playerData.DisplayName;
+            Notify("~o~Officer ~b~" + displayName + " ~o~reports show four individuals are shooting at each other!");
             suspect = await SpawnPed(GetRandomPed(), Location + 5, 3);
             suspect2 = await SpawnPed(GetRandomPed(), Location + 15, 2);
             suspect3 = await SpawnPed(GetRandomPed(), Location + 25 ,3);
             suspect4 = await SpawnPed(GetRandomPed(), Location + 21, 5);
-
+            suspect.AttachBlip();
+            suspect2.AttachBlip();
+            suspect3.AttachBlip();
+            suspect4.AttachBlip();
+            
+            //Suspect 1
+            dynamic data = new ExpandoObject();
+            data.alcoholLevel = 0.08;
+            object Pistol = new {
+                Name = "Pistol",
+                IsIllegal = true
+            };
+            items.Add(Pistol);
+            data.items = items;
+            SetPedData(suspect.NetworkId,data);
+            
+            //Suspect 2
+            dynamic data2 = new ExpandoObject();
+            object HeavyPistol = new {
+                Name = "Heavy Pistol",
+                IsIllegal = true
+            };
+            items2.Add(HeavyPistol);
+            data2.items2 = items2;
+            SetPedData(suspect2.NetworkId,data2);
+            
+            //Suspect 3
+            dynamic data3 = new ExpandoObject();
+            data3.drugsUsed = new bool[] {true,false,false};
+            object Meth = new {
+                Name = "Bag of meth",
+                IsIllegal = true
+            };
+            object CombatPistol = new {
+                Name = "CombatPistol",
+                IsIllegal = true
+            };
+            items3.Add(CombatPistol);
+            items3.Add(Meth);
+            data3.items3 = items3;
+            SetPedData(suspect3.NetworkId,data3);
+            
+            //Suspect 4
+            dynamic data4 = new ExpandoObject();
+            data4.drugsUsed = new bool[] {true,true,false};
+            object Pistol2 = new {
+                Name = "Pistol",
+                IsIllegal = true
+            };
+            items4.Add(Pistol2);
+            data4.items4 = items4;
+            SetPedData(suspect4.NetworkId,data4);
+            
+            //Tasks
             suspect.AlwaysKeepTask = true;
             suspect.BlockPermanentEvents = true;
             suspect2.AlwaysKeepTask = true;
@@ -45,7 +106,7 @@ namespace GroupGunFight
             suspect4.BlockPermanentEvents = true;
         }
 
-        public override void OnStart(Ped player)
+        public async override void OnStart(Ped player)
         {
             base.OnStart(player);
             suspect.Task.FightAgainst(suspect2);
@@ -60,6 +121,37 @@ namespace GroupGunFight
             suspect4.Task.FightAgainst(suspect);
             suspect4.Weapons.Give(WeaponHash.Pistol, 1, true, true);
             
+            dynamic data1 = await GetPedData(suspect.NetworkId);
+            string firstname = data1.Firstname;
+            dynamic data2 = await GetPedData(suspect2.NetworkId);
+            string firstname2 = data2.Firstname;
+            dynamic data3 = await GetPedData(suspect3.NetworkId);
+            string firstname3 = data3.Firstname;
+            dynamic data4 = await GetPedData(suspect4.NetworkId);
+            string firstname4 = data4.Firstname;
+            DrawSubtitle("~r~[" + firstname + "] ~s~I hate all of you!", 100);
+            API.Wait(200);
+            DrawSubtitle("~r~[" + firstname2 + "] ~s~Die!", 100);
+            API.Wait(200);
+            DrawSubtitle("~r~[" + firstname3 + "] ~s~Ahhhh!", 100);
+            API.Wait(200);
+            DrawSubtitle("~r~[" + firstname4 + "] ~s~STOP SHOOTING!", 100);
+            API.Wait(200);
+        }
+        private void Notify(string message)
+        {
+            API.BeginTextCommandThefeedPost("STRING");
+            API.AddTextComponentSubstringPlayerName(message);
+            API.EndTextCommandThefeedPostTicker(false, true);
+        }
+        private void DrawSubtitle(string message, int duration)
+        {
+            API.BeginTextCommandPrint("STRING");
+            API.AddTextComponentSubstringPlayerName(message);
+            API.EndTextCommandPrint(duration, false);
+        }
+        public override void OnCancelBefore()
+        {
         }
     }
 }
