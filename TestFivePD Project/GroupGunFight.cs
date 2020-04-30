@@ -37,7 +37,7 @@ namespace GroupGunFight
             OnAccept();
             dynamic playerData = GetPlayerData();
             string displayName = playerData.DisplayName;
-            Notify("~o~Officer ~b~" + displayName + " ~o~reports show four individuals are shooting at each other!");
+            Notify("~o~Officer ~b~" + displayName + ", ~o~reports show four individuals are shooting at each other!");
             suspect = await SpawnPed(GetRandomPed(), Location + 5, 3);
             suspect2 = await SpawnPed(GetRandomPed(), Location + 15, 2);
             suspect3 = await SpawnPed(GetRandomPed(), Location + 25 ,3);
@@ -129,14 +129,14 @@ namespace GroupGunFight
             string firstname3 = data3.Firstname;
             dynamic data4 = await GetPedData(suspect4.NetworkId);
             string firstname4 = data4.Firstname;
-            DrawSubtitle("~r~[" + firstname + "] ~s~I hate all of you!", 100);
-            API.Wait(200);
-            DrawSubtitle("~r~[" + firstname2 + "] ~s~Die!", 100);
-            API.Wait(200);
-            DrawSubtitle("~r~[" + firstname3 + "] ~s~Ahhhh!", 100);
-            API.Wait(200);
-            DrawSubtitle("~r~[" + firstname4 + "] ~s~STOP SHOOTING!", 100);
-            API.Wait(200);
+            DrawSubtitle("~r~[" + firstname + "] ~s~I hate all of you!", 500);
+            API.Wait(550);
+            DrawSubtitle("~r~[" + firstname2 + "] ~s~Die!", 500);
+            API.Wait(550);
+            DrawSubtitle("~r~[" + firstname3 + "] ~s~Ahhhh!", 500);
+            API.Wait(550);
+            DrawSubtitle("~r~[" + firstname4 + "] ~s~STOP SHOOTING!", 500);
+            API.Wait(550);
         }
         private void Notify(string message)
         {

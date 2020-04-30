@@ -103,7 +103,7 @@ namespace GroupAttack
             base.OnStart(player);
             dynamic playerData = GetPlayerData();
             string displayName = playerData.DisplayName;
-            Notify("~o~Officer ~b~" + displayName + " ~o~reports show three individuals are fighting!");
+            Notify("~o~Officer ~b~" + displayName + ", ~o~reports show three individuals are fighting!");
 
             //SUSPECT 1
             suspect.Weapons.Give(WeaponHash.Bottle, 1, true, true);
@@ -123,13 +123,13 @@ namespace GroupAttack
             string firstname3 = data3.Firstname;
             dynamic data4 = await GetPedData(victim.NetworkId);
             string firstname4 = data4.Firstname;
-            DrawSubtitle("~r~[" + firstname + "] ~s~You were not supposed to see that!", 100);
-            API.Wait(200);
-            DrawSubtitle("~r~[" + firstname2 + "] ~s~Come back here!", 100);
-            API.Wait(200);
-            DrawSubtitle("~r~[" + firstname3 + "] ~s~Your dead!", 100);
-            API.Wait(200);
-            DrawSubtitle("~r~[" + firstname4 + "] ~s~Help Me! HELP PLEASE!", 100);
+            DrawSubtitle("~r~[" + firstname + "] ~s~You were not supposed to see that!", 500);
+            API.Wait(550);
+            DrawSubtitle("~r~[" + firstname2 + "] ~s~Come back here!", 500);
+            API.Wait(550);
+            DrawSubtitle("~r~[" + firstname3 + "] ~s~Your dead!", 500);
+            API.Wait(550);
+            DrawSubtitle("~r~[" + firstname4 + "] ~s~Help Me! HELP PLEASE!", 500);
         }
         private void Notify(string message)
         {

@@ -145,7 +145,7 @@ namespace GroupFight
             base.OnStart(player);
             dynamic playerData = GetPlayerData();
             string displayName = playerData.DisplayName;
-            Notify("~o~Officer ~b~" + displayName + " ~o~reports show ten individuals are fighting!");
+            Notify("~o~Officer ~b~" + displayName + ", ~o~reports show ten individuals are fighting!");
             suspect.AttachBlip();
             suspect2.AttachBlip();
             suspect3.AttachBlip();
@@ -175,14 +175,13 @@ namespace GroupFight
             string firstname3 = data3.Firstname;
             dynamic data4 = await GetPedData(suspect4.NetworkId);
             string firstname4 = data4.Firstname;
-            DrawSubtitle("~r~[" + firstname + "] ~s~Come here you!", 100);
-            API.Wait(150);
-            DrawSubtitle("~r~[" + firstname2 + "] ~s~I hate you!", 100);
-            API.Wait(150);
-            DrawSubtitle("~r~[" + firstname3 + "] ~s~STOP HITTING ME!", 100);
-            API.Wait(150);
-            DrawSubtitle("~r~[" + firstname4 + "] ~s~That hurts!", 100);
-            API.Wait(150);
+            DrawSubtitle("~r~[" + firstname + "] ~s~Come here you!", 500);
+            API.Wait(550);
+            DrawSubtitle("~r~[" + firstname2 + "] ~s~I hate you!", 500);
+            API.Wait(550);
+            DrawSubtitle("~r~[" + firstname3 + "] ~s~STOP HITTING ME!", 500);
+            API.Wait(550);
+            DrawSubtitle("~r~[" + firstname4 + "] ~s~That hurts!", 500);
         }
         private void Notify(string message)
         {
