@@ -10,7 +10,7 @@ using CitizenFX.Core.NaturalMotion;
 namespace GroupGunFight
 {
     
-    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.4", Probability.Low)]
+    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.5", Probability.Low)]
     public class GroupGunFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4;
@@ -42,11 +42,7 @@ namespace GroupGunFight
             suspect2 = await SpawnPed(GetRandomPed(), Location + 15, 2);
             suspect3 = await SpawnPed(GetRandomPed(), Location + 25 ,3);
             suspect4 = await SpawnPed(GetRandomPed(), Location + 21, 5);
-            suspect.AttachBlip();
-            suspect2.AttachBlip();
-            suspect3.AttachBlip();
-            suspect4.AttachBlip();
-            
+
             //Suspect 1
             dynamic data = new ExpandoObject();
             data.alcoholLevel = 0.08;
@@ -109,6 +105,10 @@ namespace GroupGunFight
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
+            suspect.AttachBlip();
+            suspect2.AttachBlip();
+            suspect3.AttachBlip();
+            suspect4.AttachBlip();
             suspect.Task.FightAgainst(suspect2);
             suspect.Weapons.Give(WeaponHash.Pistol, 1, true, true);
 
@@ -129,14 +129,15 @@ namespace GroupGunFight
             string firstname3 = data3.Firstname;
             dynamic data4 = await GetPedData(suspect4.NetworkId);
             string firstname4 = data4.Firstname;
-            DrawSubtitle("~r~[" + firstname + "] ~s~I hate all of you!", 500);
-            API.Wait(550);
-            DrawSubtitle("~r~[" + firstname2 + "] ~s~Die!", 500);
-            API.Wait(550);
-            DrawSubtitle("~r~[" + firstname3 + "] ~s~Ahhhh!", 500);
-            API.Wait(550);
-            DrawSubtitle("~r~[" + firstname4 + "] ~s~STOP SHOOTING!", 500);
-            API.Wait(550);
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname + "] ~s~I hate all of you!", 5000);
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname2 + "] ~s~Die!", 5000);
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname3 + "] ~s~Ahhhh!", 5000);
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname4 + "] ~s~STOP SHOOTING!", 5000);
+            API.Wait(6000);
         }
         private void Notify(string message)
         {

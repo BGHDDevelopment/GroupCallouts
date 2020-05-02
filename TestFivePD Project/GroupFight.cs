@@ -9,7 +9,7 @@ using CitizenFX.Core.Native;
 namespace GroupFight
 {
     
-    [CalloutProperties("Group Fight", "BGHDDevelopment", "1.0.4", Probability.Medium)]
+    [CalloutProperties("Group Fight", "BGHDDevelopment", "1.0.5", Probability.Medium)]
     public class GroupFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4, suspect5, suspect6, suspect7, suspect8, suspect9, suspect10;
@@ -175,13 +175,14 @@ namespace GroupFight
             string firstname3 = data3.Firstname;
             dynamic data4 = await GetPedData(suspect4.NetworkId);
             string firstname4 = data4.Firstname;
-            DrawSubtitle("~r~[" + firstname + "] ~s~Come here you!", 500);
-            API.Wait(550);
-            DrawSubtitle("~r~[" + firstname2 + "] ~s~I hate you!", 500);
-            API.Wait(550);
-            DrawSubtitle("~r~[" + firstname3 + "] ~s~STOP HITTING ME!", 500);
-            API.Wait(550);
-            DrawSubtitle("~r~[" + firstname4 + "] ~s~That hurts!", 500);
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname + "] ~s~Come here you!", 5000);
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname2 + "] ~s~I hate you!", 5000);
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname3 + "] ~s~STOP HITTING ME!", 5000);
+            API.Wait(6000);
+            DrawSubtitle("~r~[" + firstname4 + "] ~s~That hurts!", 5000);
         }
         private void Notify(string message)
         {
