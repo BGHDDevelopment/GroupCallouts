@@ -9,7 +9,7 @@ using CitizenFX.Core.Native;
 namespace GroupFight
 {
     
-    [CalloutProperties("Group Fight", "BGHDDevelopment", "1.0.5", Probability.Medium)]
+    [CalloutProperties("Group Fight", "BGHDDevelopment", "1.0.6", Probability.Medium)]
     public class GroupFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4, suspect5, suspect6, suspect7, suspect8, suspect9, suspect10;

@@ -9,7 +9,7 @@ using CitizenFX.Core.Native;
 namespace GroupAttack
 {
 
-    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.0.5", Probability.High)]
+    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.0.6", Probability.High)]
     public class GroupAttack : Callout
     {
         Ped suspect, suspect2, suspect3, victim;
