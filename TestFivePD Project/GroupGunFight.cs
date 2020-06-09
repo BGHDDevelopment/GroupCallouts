@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Threading.Tasks;
 using CitizenFX.Core;
-using CalloutAPI;
 using CitizenFX.Core.Native;
-using CitizenFX.Core.NaturalMotion;
+using FivePD.API;
 
 namespace GroupGunFight
 {
     
-    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.6", Probability.Low)]
+    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.7", Probability.Low)]
     public class GroupGunFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4;

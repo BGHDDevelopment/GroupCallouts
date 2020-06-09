@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Threading.Tasks;
 using CitizenFX.Core;
-using CalloutAPI;
 using CitizenFX.Core.Native;
+using FivePD.API;
 
 namespace GroupAttack
 {
 
-    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.0.6", Probability.High)]
+    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.0.7", Probability.High)]
     public class GroupAttack : Callout
     {
         Ped suspect, suspect2, suspect3, victim;
