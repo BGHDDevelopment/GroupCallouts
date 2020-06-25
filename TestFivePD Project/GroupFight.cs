@@ -27,12 +27,12 @@ namespace GroupFight
             CalloutDescription = "10 unarmed suspects are fighting each other!";
             ResponseCode = 3;
             StartDistance = 120f;
-            UpdateData();
         }
 
         public async override Task OnAccept()
         {
             InitBlip();
+            UpdateData();
             suspect = await SpawnPed(GetRandomPed(), Location + 1);
             suspect2 = await SpawnPed(GetRandomPed(), Location - 1);
             suspect3 = await SpawnPed(GetRandomPed(), Location + 2);

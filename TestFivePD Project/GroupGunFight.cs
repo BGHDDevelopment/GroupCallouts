@@ -29,12 +29,12 @@ namespace GroupGunFight
             CalloutDescription = "4 armed suspects are fighting!";
             ResponseCode = 3;
             StartDistance = 30f;
-            UpdateData();
         }
 
         public async override Task OnAccept()
         {
             InitBlip();
+            UpdateData();
             dynamic playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
             Notify("~o~Officer ~b~" + displayName + ", ~o~reports show four individuals are shooting at each other!");

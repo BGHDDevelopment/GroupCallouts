@@ -29,12 +29,12 @@ namespace GroupAttack
             CalloutDescription = "3 armed suspects are attacking a civilian!";
             ResponseCode = 3;
             StartDistance = 120f;
-            UpdateData();
         }
 
         public async override Task OnAccept()
         {
             InitBlip();
+            UpdateData();
             suspect = await SpawnPed(GetRandomPed(), Location);
             suspect2 = await SpawnPed(GetRandomPed(), Location);
             suspect3 = await SpawnPed(GetRandomPed(), Location);
