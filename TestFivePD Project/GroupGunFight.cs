@@ -9,7 +9,7 @@ using FivePD.API;
 namespace GroupGunFight
 {
     
-    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.7", Probability.Low)]
+    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.8")]
     public class GroupGunFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4;
@@ -23,18 +23,19 @@ namespace GroupGunFight
             float offsetX = rnd.Next(100, 700);
             float offsetY = rnd.Next(100, 700);
 
-            InitBase(World.GetNextPositionOnStreet(Game.PlayerPed.GetOffsetPosition(new Vector3(offsetX, offsetY, 0))));
+            InitInfo(World.GetNextPositionOnStreet(Game.PlayerPed.GetOffsetPosition(new Vector3(offsetX, offsetY, 0))));
 
             ShortName = "Group Gun Fight";
             CalloutDescription = "4 armed suspects are fighting!";
             ResponseCode = 3;
             StartDistance = 30f;
+            UpdateData();
         }
 
-        public async override Task Init()
+        public async override Task OnAccept()
         {
-            OnAccept();
-            dynamic playerData = GetPlayerData();
+            InitBlip();
+            dynamic playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
             Notify("~o~Officer ~b~" + displayName + ", ~o~reports show four individuals are shooting at each other!");
             suspect = await SpawnPed(GetRandomPed(), Location + 5, 3);
@@ -51,7 +52,7 @@ namespace GroupGunFight
             };
             items.Add(Pistol);
             data.items = items;
-            SetPedData(suspect.NetworkId,data);
+            Utilities.SetPedData(suspect.NetworkId,data);
             
             //Suspect 2
             dynamic data2 = new ExpandoObject();
@@ -61,7 +62,7 @@ namespace GroupGunFight
             };
             items2.Add(HeavyPistol);
             data2.items2 = items2;
-            SetPedData(suspect2.NetworkId,data2);
+            Utilities.SetPedData(suspect2.NetworkId,data2);
             
             //Suspect 3
             dynamic data3 = new ExpandoObject();
@@ -77,7 +78,7 @@ namespace GroupGunFight
             items3.Add(CombatPistol);
             items3.Add(Meth);
             data3.items3 = items3;
-            SetPedData(suspect3.NetworkId,data3);
+            Utilities.SetPedData(suspect3.NetworkId,data3);
             
             //Suspect 4
             dynamic data4 = new ExpandoObject();
@@ -88,7 +89,7 @@ namespace GroupGunFight
             };
             items4.Add(Pistol2);
             data4.items4 = items4;
-            SetPedData(suspect4.NetworkId,data4);
+            Utilities.SetPedData(suspect4.NetworkId,data4);
             
             //Tasks
             suspect.AlwaysKeepTask = true;
@@ -120,13 +121,13 @@ namespace GroupGunFight
             suspect4.Task.FightAgainst(suspect);
             suspect4.Weapons.Give(WeaponHash.Pistol, 1, true, true);
             
-            dynamic data1 = await GetPedData(suspect.NetworkId);
+            dynamic data1 = await Utilities.GetPedData(suspect.NetworkId);
             string firstname = data1.Firstname;
-            dynamic data2 = await GetPedData(suspect2.NetworkId);
+            dynamic data2 = await Utilities.GetPedData(suspect2.NetworkId);
             string firstname2 = data2.Firstname;
-            dynamic data3 = await GetPedData(suspect3.NetworkId);
+            dynamic data3 = await Utilities.GetPedData(suspect3.NetworkId);
             string firstname3 = data3.Firstname;
-            dynamic data4 = await GetPedData(suspect4.NetworkId);
+            dynamic data4 = await Utilities.GetPedData(suspect4.NetworkId);
             string firstname4 = data4.Firstname;
             API.Wait(6000);
             DrawSubtitle("~r~[" + firstname + "] ~s~I hate all of you!", 5000);
