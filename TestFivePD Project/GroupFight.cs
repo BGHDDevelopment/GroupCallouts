@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using FivePD.API;
+using FivePD.API.Utils;
 
 namespace GroupFight
 {
     
-    [CalloutProperties("Group Fight", "BGHDDevelopment", "1.0.8")]
+    [CalloutProperties("Group Fight", "BGHDDevelopment", "1.0.9")]
     public class GroupFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4, suspect5, suspect6, suspect7, suspect8, suspect9, suspect10;
-        List<object> items = new List<object>();
 
         public GroupFight()
         {
@@ -33,87 +33,81 @@ namespace GroupFight
         {
             InitBlip();
             UpdateData();
-            suspect = await SpawnPed(GetRandomPed(), Location + 1);
-            suspect2 = await SpawnPed(GetRandomPed(), Location - 1);
-            suspect3 = await SpawnPed(GetRandomPed(), Location + 2);
-            suspect4 = await SpawnPed(GetRandomPed(), Location - 2);
-            suspect5 = await SpawnPed(GetRandomPed(), Location + 1);
-            suspect6 = await SpawnPed(GetRandomPed(), Location - 1);
-            suspect7 = await SpawnPed(GetRandomPed(), Location + 3);
-            suspect8 = await SpawnPed(GetRandomPed(), Location - 3);
-            suspect9 = await SpawnPed(GetRandomPed(), Location + 1);
-            suspect10 = await SpawnPed(GetRandomPed(), Location - 1);
+            
+            suspect = await SpawnPed(RandomUtils.GetRandomPed(), Location + 1);
+            suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location - 1);
+            suspect3 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 2);
+            suspect4 = await SpawnPed(RandomUtils.GetRandomPed(), Location - 2);
+            suspect5 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 1);
+            suspect6 = await SpawnPed(RandomUtils.GetRandomPed(), Location - 1);
+            suspect7 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 3);
+            suspect8 = await SpawnPed(RandomUtils.GetRandomPed(), Location - 3);
+            suspect9 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 1);
+            suspect10 = await SpawnPed(RandomUtils.GetRandomPed(), Location - 1);
 
             
             
             //Suspect 1
-            dynamic data = new ExpandoObject();
-            data.alcoholLevel = 0.08;
-            data.drugsUsed = new bool[] {false,false,true};
+            PedData data = new PedData();
+            data.BloodAlcoholLevel = 0.08;
             Utilities.SetPedData(suspect.NetworkId,data);
             
             //Suspect 2
-            dynamic data2 = new ExpandoObject();
-            data2.alcoholLevel = 0.05;
-            data2.drugsUsed = new bool[] {true,false,false};
+            PedData data2 = new PedData();
+            data2.BloodAlcoholLevel = 0.05;
             Utilities.SetPedData(suspect2.NetworkId,data2);
             
             //Suspect 3
-            dynamic data3 = new ExpandoObject();
-            data3.alcoholLevel = 0.02;
-            data3.drugsUsed = new bool[] {false,false,false};
+            PedData data3 = new PedData();
+            data3.BloodAlcoholLevel = 0.02;
             Utilities.SetPedData(suspect3.NetworkId,data3);
             
             //Suspect 4
-            dynamic data4 = new ExpandoObject();
-            data4.alcoholLevel = 0.00;
-            data4.drugsUsed = new bool[] {false,false,false};
-            object Cash = new {
+            PedData data4 = new PedData();
+            data4.BloodAlcoholLevel = 0.00;
+            List<Item> items = new List<Item>();
+            Item Cash = new Item {
                 Name = "$500 Cash",
                 IsIllegal = false
             };
             items.Add(Cash);
+            data.Items = items;
             Utilities.SetPedData(suspect4.NetworkId,data4);
             
             //Suspect 5
-            dynamic data5 = new ExpandoObject();
-            data5.alcoholLevel = 0.00;
-            data5.drugsUsed = new bool[] {true,true,true};
+            PedData data5 = new PedData();
+            data5.BloodAlcoholLevel = 0.00;
             Utilities.SetPedData(suspect5.NetworkId,data5);
             
             //Suspect 6
-            dynamic data6 = new ExpandoObject();
-            data6.alcoholLevel = 0.20;
-            data6.drugsUsed = new bool[] {false,false,false};
+            PedData data6 = new PedData();
+            data6.BloodAlcoholLevel = 0.20;
             Utilities.SetPedData(suspect6.NetworkId,data6);
             
             //Suspect 7
-            dynamic data7 = new ExpandoObject();
-            data7.alcoholLevel = 0.01;
-            data7.drugsUsed = new bool[] {false,false,false};
+            PedData data7 = new PedData();
+            data7.BloodAlcoholLevel = 0.01;
             Utilities.SetPedData(suspect7.NetworkId,data7);
             
             //Suspect 8
-            dynamic data8 = new ExpandoObject();
-            data8.alcoholLevel = 0.08;
-            data8.drugsUsed = new bool[] {false,false,false};
+            PedData data8 = new PedData();
+            data8.BloodAlcoholLevel = 0.08;
             Utilities.SetPedData(suspect8.NetworkId,data8);
             
             //Suspect 9
-            dynamic data9 = new ExpandoObject();
-            data9.alcoholLevel = 0.00;
-            data9.drugsUsed = new bool[] {false,true,false};
+            PedData data9 = new PedData();
+            data9.BloodAlcoholLevel = 0.00;
             Utilities.SetPedData(suspect9.NetworkId,data9);
             
             //Suspect 10
-            dynamic data10 = new ExpandoObject();
-            data10.alcoholLevel = 0.00;
-            data10.drugsUsed = new bool[] {false,false,true};
-            object Cash2 = new {
-                Name = "$500 Cash",
+            PedData data10 = new PedData();
+            List<Item> items2 = new List<Item>();
+            Item Cash2 = new Item {
+                Name = "$5000 Cash",
                 IsIllegal = false
             };
-            items.Add(Cash);
+            items2.Add(Cash2);
+            data.Items = items;
             Utilities.SetPedData(suspect10.NetworkId,data10);
             
             
@@ -143,7 +137,7 @@ namespace GroupFight
         public async override void OnStart(Ped player)
         {
             base.OnStart(player);
-            dynamic playerData = Utilities.GetPlayerData();
+            PlayerData playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
             Notify("~o~Officer ~b~" + displayName + ", ~o~reports show ten individuals are fighting!");
             suspect.AttachBlip();
@@ -167,14 +161,14 @@ namespace GroupFight
             suspect9.Task.FightAgainst(suspect10);
             suspect10.Task.FightAgainst(suspect);
             
-            dynamic data1 = await Utilities.GetPedData(suspect.NetworkId);
-            string firstname = data1.Firstname;
-            dynamic data2 = await Utilities.GetPedData(suspect2.NetworkId);
-            string firstname2 = data2.Firstname;
-            dynamic data3 = await Utilities.GetPedData(suspect3.NetworkId);
-            string firstname3 = data3.Firstname;
-            dynamic data4 = await Utilities.GetPedData(suspect4.NetworkId);
-            string firstname4 = data4.Firstname;
+            PedData data1 = await Utilities.GetPedData(suspect.NetworkId);
+            string firstname = data1.FirstName;
+            PedData data2 = await Utilities.GetPedData(suspect2.NetworkId);
+            string firstname2 = data2.FirstName;
+            PedData data3 = await Utilities.GetPedData(suspect3.NetworkId);
+            string firstname3 = data3.FirstName;
+            PedData data4 = await Utilities.GetPedData(suspect4.NetworkId);
+            string firstname4 = data4.FirstName;
             API.Wait(6000);
             DrawSubtitle("~r~[" + firstname + "] ~s~Come here you!", 5000);
             API.Wait(6000);
@@ -195,9 +189,6 @@ namespace GroupFight
             API.BeginTextCommandPrint("STRING");
             API.AddTextComponentSubstringPlayerName(message);
             API.EndTextCommandPrint(duration, false);
-        }
-        public override void OnCancelBefore()
-        {
         }
     }
 }

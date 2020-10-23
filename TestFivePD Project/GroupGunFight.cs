@@ -5,18 +5,15 @@ using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using FivePD.API;
+using FivePD.API.Utils;
 
 namespace GroupGunFight
 {
     
-    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.8")]
+    [CalloutProperties("Group Gun Fight", "BGHDDevelopment", "1.0.9")]
     public class GroupGunFight : Callout
     {
         Ped suspect, suspect2, suspect3, suspect4;
-        List<object> items = new List<object>();
-        List<object> items2 = new List<object>();
-        List<object> items3 = new List<object>();
-        List<object> items4 = new List<object>();
         public GroupGunFight()
         {
             Random rnd = new Random();
@@ -35,60 +32,46 @@ namespace GroupGunFight
         {
             InitBlip();
             UpdateData();
-            dynamic playerData = Utilities.GetPlayerData();
+            
+            PlayerData playerData = Utilities.GetPlayerData();
             string displayName = playerData.DisplayName;
             Notify("~o~Officer ~b~" + displayName + ", ~o~reports show four individuals are shooting at each other!");
-            suspect = await SpawnPed(GetRandomPed(), Location + 5, 3);
-            suspect2 = await SpawnPed(GetRandomPed(), Location + 15, 2);
-            suspect3 = await SpawnPed(GetRandomPed(), Location + 25 ,3);
-            suspect4 = await SpawnPed(GetRandomPed(), Location + 21, 5);
+            
+            suspect = await SpawnPed(RandomUtils.GetRandomPed(), Location + 5, 3);
+            suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 15, 2);
+            suspect3 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 25 ,3);
+            suspect4 = await SpawnPed(RandomUtils.GetRandomPed(), Location + 21, 5);
 
             //Suspect 1
-            dynamic data = new ExpandoObject();
-            data.alcoholLevel = 0.08;
-            object Pistol = new {
+            PedData data = new PedData();
+            List<Item> items = new List<Item>();
+            data.BloodAlcoholLevel = 0.08;
+            Item Pistol = new Item {
                 Name = "Pistol",
-                IsIllegal = true
+                IsIllegal = false
             };
             items.Add(Pistol);
-            data.items = items;
+            data.Items = items;
             Utilities.SetPedData(suspect.NetworkId,data);
             
             //Suspect 2
-            dynamic data2 = new ExpandoObject();
-            object HeavyPistol = new {
-                Name = "Heavy Pistol",
-                IsIllegal = true
-            };
-            items2.Add(HeavyPistol);
-            data2.items2 = items2;
+            PedData data2 = new PedData();
             Utilities.SetPedData(suspect2.NetworkId,data2);
             
             //Suspect 3
-            dynamic data3 = new ExpandoObject();
-            data3.drugsUsed = new bool[] {true,false,false};
-            object Meth = new {
-                Name = "Bag of meth",
-                IsIllegal = true
-            };
-            object CombatPistol = new {
-                Name = "CombatPistol",
-                IsIllegal = true
-            };
-            items3.Add(CombatPistol);
-            items3.Add(Meth);
-            data3.items3 = items3;
+            PedData data3 = new PedData();
             Utilities.SetPedData(suspect3.NetworkId,data3);
             
             //Suspect 4
-            dynamic data4 = new ExpandoObject();
-            data4.drugsUsed = new bool[] {true,true,false};
-            object Pistol2 = new {
+            PedData data4 = new PedData();
+            List<Item> items2 = new List<Item>();
+            data.BloodAlcoholLevel = 0.08;
+            Item Pistol2 = new Item {
                 Name = "Pistol",
-                IsIllegal = true
+                IsIllegal = false
             };
-            items4.Add(Pistol2);
-            data4.items4 = items4;
+            items.Add(Pistol2);
+            data4.Items = items2;
             Utilities.SetPedData(suspect4.NetworkId,data4);
             
             //Tasks
@@ -121,14 +104,14 @@ namespace GroupGunFight
             suspect4.Task.FightAgainst(suspect);
             suspect4.Weapons.Give(WeaponHash.Pistol, 1, true, true);
             
-            dynamic data1 = await Utilities.GetPedData(suspect.NetworkId);
-            string firstname = data1.Firstname;
-            dynamic data2 = await Utilities.GetPedData(suspect2.NetworkId);
-            string firstname2 = data2.Firstname;
-            dynamic data3 = await Utilities.GetPedData(suspect3.NetworkId);
-            string firstname3 = data3.Firstname;
-            dynamic data4 = await Utilities.GetPedData(suspect4.NetworkId);
-            string firstname4 = data4.Firstname;
+            PedData data1 = await Utilities.GetPedData(suspect.NetworkId);
+            string firstname = data1.FirstName;
+            PedData data2 = await Utilities.GetPedData(suspect2.NetworkId);
+            string firstname2 = data2.FirstName;
+            PedData data3 = await Utilities.GetPedData(suspect3.NetworkId);
+            string firstname3 = data3.FirstName;
+            PedData data4 = await Utilities.GetPedData(suspect4.NetworkId);
+            string firstname4 = data4.FirstName;
             API.Wait(6000);
             DrawSubtitle("~r~[" + firstname + "] ~s~I hate all of you!", 5000);
             API.Wait(6000);
@@ -150,9 +133,6 @@ namespace GroupGunFight
             API.BeginTextCommandPrint("STRING");
             API.AddTextComponentSubstringPlayerName(message);
             API.EndTextCommandPrint(duration, false);
-        }
-        public override void OnCancelBefore()
-        {
         }
     }
 }

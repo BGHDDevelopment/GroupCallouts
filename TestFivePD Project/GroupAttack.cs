@@ -5,18 +5,15 @@ using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using FivePD.API;
+using FivePD.API.Utils;
 
 namespace GroupAttack
 {
 
-    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.0.8")]
+    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.0.9")]
     public class GroupAttack : Callout
     {
         Ped suspect, suspect2, suspect3, victim;
-        List<object> items = new List<object>();
-        List<object> items2 = new List<object>();
-        List<object> items3 = new List<object>();
-        List<object> items4 = new List<object>();
         public GroupAttack()
         {
             Random rnd = new Random();
@@ -35,51 +32,54 @@ namespace GroupAttack
         {
             InitBlip();
             UpdateData();
-            suspect = await SpawnPed(GetRandomPed(), Location);
-            suspect2 = await SpawnPed(GetRandomPed(), Location);
-            suspect3 = await SpawnPed(GetRandomPed(), Location);
-            victim = await SpawnPed(GetRandomPed(), Location);
+            suspect = await SpawnPed(RandomUtils.GetRandomPed(), Location);
+            suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location);
+            suspect3 = await SpawnPed(RandomUtils.GetRandomPed(), Location);
+            victim = await SpawnPed(RandomUtils.GetRandomPed(), Location);
 
             //Suspect 1
-            dynamic data = new ExpandoObject();
-            data.alcoholLevel = 0.02;
-            object Bottle = new {
+            PedData data = new PedData();
+            List<Item> items = new List<Item>();
+            data.BloodAlcoholLevel = 0.02;
+            Item Bottle = new Item {
                 Name = "Bottle",
-                IsIllegal = true
+                IsIllegal = false
             };
             items.Add(Bottle);
-            data.items = items;
+            data.Items = items;
             Utilities.SetPedData(suspect.NetworkId,data);
             
             //Suspect 2
-            dynamic data2 = new ExpandoObject();
-            object Crowbar = new {
+            PedData data2 = new PedData();
+            List<Item> items2 = new List<Item>();
+            Item Crowbar = new Item {
                 Name = "Crowbar",
-                IsIllegal = true
+                IsIllegal = false
             };
             items2.Add(Crowbar);
-            data2.items2 = items2;
+            data2.Items = items2;
             Utilities.SetPedData(suspect2.NetworkId,data2);
             
             //Suspect 3
-            dynamic data3 = new ExpandoObject();
-            data3.drugsUsed = new bool[] {false,false,true};
-            object GolfClub = new {
+            PedData data3 = new PedData();
+            List<Item> items3 = new List<Item>();
+            Item GolfClub = new Item {
                 Name = "GolfClub",
-                IsIllegal = true
+                IsIllegal = false
             };
             items3.Add(GolfClub);
-            data3.items3 = items3;
+            data3.Items = items3;
             Utilities.SetPedData(suspect3.NetworkId,data3);
             
             //Victim
-            dynamic data4 = new ExpandoObject();
-            object Purse = new {
+            PedData data4 = new PedData();
+            List<Item> items4 = new List<Item>();
+            Item Purse = new Item {
                 Name = "Purse",
                 IsIllegal = false
             };
             items4.Add(Purse);
-            data4.items4 = items4;
+            data4.Items = items4;
             Utilities.SetPedData(victim.NetworkId,data4);
 
             //Tasks
@@ -114,14 +114,14 @@ namespace GroupAttack
             suspect3.Weapons.Give(WeaponHash.GolfClub, 1, true, true);
             suspect3.Task.FightAgainst(victim);
             victim.Task.ReactAndFlee(suspect);
-            dynamic data1 = await Utilities.GetPedData(suspect.NetworkId);
-            string firstname = data1.Firstname;
-            dynamic data2 = await Utilities.GetPedData(suspect2.NetworkId);
-            string firstname2 = data2.Firstname;
-            dynamic data3 = await Utilities.GetPedData(suspect3.NetworkId);
-            string firstname3 = data3.Firstname;
-            dynamic data4 = await Utilities.GetPedData(victim.NetworkId);
-            string firstname4 = data4.Firstname;
+            PedData data1 = await Utilities.GetPedData(suspect.NetworkId);
+            string firstname = data1.FirstName;
+            PedData data2 = await Utilities.GetPedData(suspect2.NetworkId);
+            string firstname2 = data2.FirstName;
+            PedData data3 = await Utilities.GetPedData(suspect3.NetworkId);
+            string firstname3 = data3.FirstName;
+            PedData data4 = await Utilities.GetPedData(victim.NetworkId);
+            string firstname4 = data4.FirstName;
             API.Wait(6000);
             DrawSubtitle("~r~[" + firstname + "] ~s~You were not supposed to see that!", 5000);
             API.Wait(6000);
@@ -142,9 +142,6 @@ namespace GroupAttack
             API.BeginTextCommandPrint("STRING");
             API.AddTextComponentSubstringPlayerName(message);
             API.EndTextCommandPrint(duration, false);
-        }
-        public override void OnCancelBefore()
-        {
         }
     }
 }
