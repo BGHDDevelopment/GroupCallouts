@@ -7,3 +7,14 @@ C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\bin\Release\Gr
 C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\obj\Release\GroupCallouts.net.dll
 C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\obj\Release\GroupCallouts.net.pdb
 C:\Users\USER\RiderProjects\TestFivePD Project\TestFivePD Project\bin\Release\FivePD.net.dll
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\bin\Release\GroupCallouts.net.dll
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\bin\Release\GroupCallouts.net.pdb
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\bin\Release\CitizenFX.Core.Client.dll
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\bin\Release\FivePD.net.dll
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\bin\Release\CitizenFX.Core.Client.xml
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\bin\Release\FivePD.net.xml
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\obj\Release\TestFivePD Project.csprojAssemblyReference.cache
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\obj\Release\TestFivePD Project.csproj.CoreCompileInputs.cache
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\obj\Release\TestFivePD Project.csproj.CopyComplete
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\obj\Release\GroupCallouts.net.dll
+C:\Users\steph\Desktop\Source\GroupCallouts\TestFivePD Project\obj\Release\GroupCallouts.net.pdb

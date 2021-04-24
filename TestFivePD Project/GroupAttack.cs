@@ -10,7 +10,7 @@ using FivePD.API.Utils;
 namespace GroupAttack
 {
 
-    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.0.9")]
+    [CalloutProperties("Group Attack", "BGHDDevelopment", "1.1.0")]
     public class GroupAttack : Callout
     {
         Ped suspect, suspect2, suspect3, victim;
@@ -32,7 +32,12 @@ namespace GroupAttack
         {
             InitBlip();
             UpdateData();
-            suspect = await SpawnPed(RandomUtils.GetRandomPed(), Location);
+        }
+
+        public async override void OnStart(Ped player)
+        {
+            base.OnStart(player);
+                        suspect = await SpawnPed(RandomUtils.GetRandomPed(), Location);
             suspect2 = await SpawnPed(RandomUtils.GetRandomPed(), Location);
             suspect3 = await SpawnPed(RandomUtils.GetRandomPed(), Location);
             victim = await SpawnPed(RandomUtils.GetRandomPed(), Location);
@@ -91,11 +96,7 @@ namespace GroupAttack
             suspect3.BlockPermanentEvents = true;
             victim.AlwaysKeepTask = true;
             victim.BlockPermanentEvents = true;
-        }
-
-        public async override void OnStart(Ped player)
-        {
-            base.OnStart(player);
+            
             suspect.AttachBlip();
             suspect2.AttachBlip();
             suspect3.AttachBlip();
@@ -116,12 +117,12 @@ namespace GroupAttack
             victim.Task.ReactAndFlee(suspect);
             PedData data1 = await Utilities.GetPedData(suspect.NetworkId);
             string firstname = data1.FirstName;
-            PedData data2 = await Utilities.GetPedData(suspect2.NetworkId);
-            string firstname2 = data2.FirstName;
-            PedData data3 = await Utilities.GetPedData(suspect3.NetworkId);
-            string firstname3 = data3.FirstName;
-            PedData data4 = await Utilities.GetPedData(victim.NetworkId);
-            string firstname4 = data4.FirstName;
+            PedData data5 = await Utilities.GetPedData(suspect2.NetworkId);
+            string firstname2 = data5.FirstName;
+            PedData data6 = await Utilities.GetPedData(suspect3.NetworkId);
+            string firstname3 = data6.FirstName;
+            PedData data7 = await Utilities.GetPedData(victim.NetworkId);
+            string firstname4 = data7.FirstName;
             API.Wait(6000);
             DrawSubtitle("~r~[" + firstname + "] ~s~You were not supposed to see that!", 5000);
             API.Wait(6000);
